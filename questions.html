@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question Assignment</title>
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h2, h3 {
+      color: #333;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      color: #555;
+    }
+    input[type="text"] {
+      padding: 8px;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .download-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 8px 20px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .download-btn:hover {
+      background-color: #218838;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    label,input{
+      padding: 20px;
+      margin-left: 40vw;
+    }
+    button{
+      margin-left:43vw;
+    }
+    form{
+      width:100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Question Assignment</h1>
+  <form id="questionForm">
+    <label for="rollNumber">Enter Roll Number:</label>
+    <br>
+    
+    <br>
+    <input type="text" id="rollNumber" name="rollNumber" required>
+    <br>
+    
+    <br>
+    <button type="submit" id="submitBtn">Submit</button>
+  </form>
+	
+  <h3>Assigned Questions:</h3>
+  <table id="assignedQuestions">
+    <thead>
+      <tr>
+        <th>SET Number</th>
+        <th>Question</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- This will be populated dynamically -->
+    </tbody>
+  </table>
+<P>
+<p><b>You have to choose one pattern given beow and Write the C program with output<b></p>
+	<img src="Pattern-Programs-in-C.jpg" width="600px" height="600px" class="center">
+  <button class="download-btn" id="downloadBtn">Download CSV</button>
+  <script>
+    const assignedQuestions = {}; // Object to keep track of assigned questions
+
+document.getElementById('questionForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const rollNumberInput = document.getElementById('rollNumber');
+  const rollNumber = rollNumberInput.value.trim();
+console.log(rollNumber);
+  if (assignedQuestions.hasOwnProperty(rollNumber)) {
+    alert("This roll number has already been entered!");
+    return;
+  }
+  const question = generateQuestion(rollNumber); // Function to generate a random question
+  const tableBody = document.getElementById('assignedQuestions').getElementsByTagName('tbody')[0];
+  const newRow = tableBody.insertRow();
+  const cell1 = newRow.insertCell(0);
+  const cell2 = newRow.insertCell(1);
+  cell1.textContent = rollNumber;
+  cell2.textContent = question;
+  assignedQuestions[rollNumber] = question; // Mark the roll number as assigned
+  rollNumberInput.value = ""; // Clear input field
+  // Save to CSV file (not implemented in this example)
+});
+
+document.getElementById('downloadBtn').addEventListener('click', function() {
+  downloadCSV();
+});
+
+function generateQuestion(rollNumber) {
+  // Function to generate a random question that has not been assigned yet
+  const questions = ['Write a  Program to read two numbers from user. Find their product after exchanging last digits. ','Write a Program to swap two numbers using and without using a third variable. ','Write a Program to accept temperature from user and change from Fahrenheit to Celsius or vice-versa. ','Write a Program to test whether a year is a Leap year or not using suitable conditions. ','Write a Program to check whether a user input number is Palindrome or not. ','Write a Program to find all the Fibonacci numbers for a given user input range. ','Write a Program to find all Prime numbers within a given user input range. ','Write a Program to declare, read and display values in a 2-D array. Row & Column size of array must be user defined. ','Write a Program to count the frequency of each element of an user defined array. ','Write a Program to perform matrix Addition with a 3x3 user defined matrix. Row & Column size of matrix must be user defined. ','Write a Program to find out the largest and smallest element in a user defined array. ','Write a Program to perform matrix Multiplication with a 3x3 user defined matrix.  Row & Column size of matrix must be user defined. ','Write a Program to split an array or merge two array as per user choice. ','Write a program to remove duplicates from an array of integers. ','Write a Program to perform linear search of n elements of an array taken as user input. ','Write a Program to perform Bubble sort in a user defined array. ','Write a Program to perform Binary search of n elements of an array taken as user input. ','Write a Program to perform Insertion sort in a user defined array. ','Write a Program to perform Merge sort in a user defined array. ','Write a Program to perform Selection sort in a user defined array. ','Write a Program to find factorial of a input number using user defined functions as well as recursion function. ','Write a Program to find GCD (Greatest Common Divisor) and LCM (Least Common Multiple) of two input numbers using recursion. ','Write a Program to display the Fibonacci series for a given range using recursion. ','Write a program to calculate the power of a number using a recursive function. ','Write a program to convert a decimal number to binary using a recursive function. ','Write a Program to check whether any use given input number is Armstrong number or not using user defined functions. ','Write a Program to check whether any use given input number is Peterson number or not using user defined functions. ','Write a Program to implement an array of structures to store each of five data of multiple students. ','Write a Program to find the factorial of a given number using function and pointers. ','Write a Program to read and display values in a array using pointers. ','Write a program to find the maximum element in an array using pointers. ','Write a program to count the number of words in a string using pointers. ','Write a program to reverse an array of integers using pointers. ','Write a Program to create a text file and write name, subject and marks of a student and then calculate his average marks. ','"Write a program to create a structure called ""book"" with members for book ID, title, author, and price. ','Input details for n books and display the details of the book with the lowest price." ','Write a Program to check whether a string is palindrome or not. Use only user defined functions. ','Write a Program to compare two strings and concatenate them. ','Write a program to count the number of characters, words, and lines in a given text file. ','Write a program to remove all vowels from a given string. ','Write a program to check if a given string is an anagram of another string.'
+];
+  const assignedRollNumbers = Object.keys(assignedQuestions);
+  const unassignedQuestions = questions.filter(q => {
+    const count = Object.values(assignedQuestions).filter(v => v === q).length;
+    return count === 0 || count === 1;
+  }).filter(question => {
+    // Check if the question is assigned to nearby roll numbers
+    return !assignedRollNumbers.includes((rollNumber - 1).toString()) ||
+           assignedQuestions[(rollNumber - 1).toString()] !== question &&
+           !assignedRollNumbers.includes((rollNumber + 1).toString()) ||
+           assignedQuestions[(rollNumber + 1).toString()] !== question;
+  });
+  if (unassignedQuestions.length === 0) {
+    return "All questions assigned"; // In case all questions have been assigned
+  }
+
+  let randomIndex = Math.floor(Math.random() * unassignedQuestions.length);
+  let question = unassignedQuestions[randomIndex];
+
+  return question;
+}
+
+
+function downloadCSV() {
+  const rows = [];
+  const table = document.getElementById('assignedQuestions');
+  const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent);
+  rows.push(headers.join(','));
+  const dataRows = Array.from(table.querySelectorAll('tbody tr')).map(tr => Array.from(tr.querySelectorAll('td')).map(td => td.textContent));
+  dataRows.forEach(row => rows.push(row.join(',')));
+  const csvContent = rows.join('\n');
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'assigned_questions.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+  </script>
+</body>
+</html>
